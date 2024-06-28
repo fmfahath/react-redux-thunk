@@ -2,6 +2,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 import './App.css';
 import AddTask from './components/AddTask';
 import Navbar from './components/Navbar';
+import TasksList from './components/TasksList';
 
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
       <Row className='justify-content-md-center'>
         <Col lg='6'>
           <AddTask />
+          <TasksList />
         </Col>
       </Row>
     </Container>
