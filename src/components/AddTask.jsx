@@ -13,7 +13,6 @@ const AddTask = () => {
 
     const addTask = (e) => {
         e.preventDefault();
-        console.log({ title, description });
         dispatch(addTaskToList({ title, description }))
         setTitle("")
         setDescription("")

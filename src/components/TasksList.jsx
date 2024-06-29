@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import { useSelector } from 'react-redux';
 import MyVerticallyCenteredModal from './UpdateTask';
-import { setSeletedTask, removeFromList } from '../slices/taskSlice';
+import { setSeletedTask, removeFromList, getTaskFromServer } from '../slices/taskSlice';
 import { useDispatch } from 'react-redux';
 
 const TasksList = () => {
@@ -20,6 +20,15 @@ const TasksList = () => {
     const deleteTask = (task) => {
         dispatch(removeFromList(task))
     }
+
+
+    //get data using thunk reducers
+    useEffect(() => {
+        dispatch(getTaskFromServer())
+    }, [dispatch])
+
+
+
     return (
         <>
             <Table striped bordered hover>
