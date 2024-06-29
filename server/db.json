@@ -1,24 +1,9 @@
 {
   "tasks": [
     {
-      "id": 1,
-      "title": "testing",
-      "description": "testing react components"
-    },
-    {
-      "id": 2,
-      "title": "web launch",
-      "description": "hosting setting needed"
-    },
-    {
-      "id": 3,
-      "title": "Mobile app",
-      "description": "has to develop android app"
-    },
-    {
-      "id": "a120",
-      "title": "test",
-      "description": "test updateTask check ok"
+      "id": "e258",
+      "title": "test 1",
+      "description": "test 1"
     }
   ]
 }
