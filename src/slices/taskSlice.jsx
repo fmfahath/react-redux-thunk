@@ -47,6 +47,28 @@ export const addTaskToServer = createAsyncThunk(
     }
 );
 
+//PATCH
+export const updateTaskToServer = createAsyncThunk(
+    "task/updateTaskToServer",
+    async (task, { rejectWithValue }) => {
+        const options = {
+            method: 'PATCH',
+            body: JSON.stringify(task),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        }
+
+        const response = await fetch(`http://localhost:7878/tasks/${task.id}`, options)
+        if (response.ok) {
+            const jsonResponse = response.json()
+            return jsonResponse;
+        }
+        else {
+            return rejectWithValue({ error: 'Cannot Update Task' });
+        }
+    }
+);
 
 
 
@@ -97,6 +119,18 @@ const taskSlice = createSlice({
                 state.taskList.push(action.payload)
             })
             .addCase(addTaskToServer.rejected, (state, action) => {
+                state.isLoading = false
+                state.error = action.payload.error
+            })
+            .addCase(updateTaskToServer.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(updateTaskToServer.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.error = ''
+                state.taskList = state.taskList.map((task) => task.id === action.payload.id ? action.payload : task)
+            })
+            .addCase(updateTaskToServer.rejected, (state, action) => {
                 state.isLoading = false
                 state.error = action.payload.error
             })
