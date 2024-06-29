@@ -5,7 +5,7 @@ const Navbar = () => {
     const { taskList, error } = useSelector((state) => state.tasks)
     return (
         <>
-            <h1 className='text-center my-4 text-primary'>Project Managment</h1>
+            <h1 className='text-center my-4 text-primary'>Project Management</h1>
             <p className='text-center lead'>Currently {taskList.length} task(s) pending</p>
             {
                 error !== '' ?

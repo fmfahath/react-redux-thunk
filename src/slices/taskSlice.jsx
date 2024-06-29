@@ -24,6 +24,28 @@ export const getTaskFromServer = createAsyncThunk(
     }
 );
 
+//POST
+export const addTaskToServer = createAsyncThunk(
+    "task/addTaskToServer",
+    async (task, { rejectWithValue }) => {
+        const options = {
+            method: 'POST',
+            body: JSON.stringify(task),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        }
+
+        const response = await fetch('http://localhost:7878/tasks', options)
+        if (response.ok) {
+            const jsonResponse = response.json()
+            return jsonResponse;
+        }
+        else {
+            return rejectWithValue({ error: 'Cannot Add Task' });
+        }
+    }
+);
 
 
 
@@ -66,6 +88,20 @@ const taskSlice = createSlice({
                 state.taskList = []
                 state.error = action.payload.error
             })
+            .addCase(addTaskToServer.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(addTaskToServer.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.error = ''
+                state.taskList.push(action.payload)
+            })
+            .addCase(addTaskToServer.rejected, (state, action) => {
+                state.isLoading = false
+                state.error = action.payload.error
+            })
+
+
     }
 });
 

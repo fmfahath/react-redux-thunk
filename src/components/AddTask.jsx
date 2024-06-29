@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { addTaskToList } from '../slices/taskSlice';
+import { addTaskToServer } from '../slices/taskSlice';
 import { useDispatch } from 'react-redux';
 
 const AddTask = () => {
@@ -13,7 +13,8 @@ const AddTask = () => {
 
     const addTask = (e) => {
         e.preventDefault();
-        dispatch(addTaskToList({ title, description }))
+        // dispatch(addTaskToList({ title, description })) //to local state
+        dispatch(addTaskToServer({ title, description })) //to server
         setTitle("")
         setDescription("")
     }
