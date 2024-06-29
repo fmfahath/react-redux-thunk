@@ -22,7 +22,7 @@ const TasksList = () => {
     }
 
 
-    //get data using thunk reducers
+    //get data using thunk reducers (GET)
     useEffect(() => {
         dispatch(getTaskFromServer())
     }, [dispatch])
